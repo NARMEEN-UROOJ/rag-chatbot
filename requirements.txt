@@ -1,7 +1,6 @@
-langchain
-faiss-cpu
-openai
 streamlit
-python-dotenv
+langchain
+langchain-community
+openai
+faiss-cpu
 tiktoken
-gradio
