@@ -1,0 +1,6 @@
+
+Parallel computing is a type of computation in which many calculations are carried out simultaneously.
+Large problems can often be divided into smaller ones, which are then solved concurrently.
+
+Distributed systems refer to multiple computers working together to solve a problem. These systems
+rely on message passing interfaces (MPI) to communicate between nodes.
