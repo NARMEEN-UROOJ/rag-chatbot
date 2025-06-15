@@ -15,12 +15,13 @@ huggingfacehub_api_token = os.environ.get("HUGGINGFACEHUB_API_TOKEN")
 if not huggingfacehub_api_token:
     st.error("HUGGINGFACEHUB_API_TOKEN environment variable not set!")
     st.stop() # Stop execution if the token is missing
-
+    
 llm = HuggingFaceHub(
-    repo_id="google/flan-t5-base",
-    model_kwargs={"temperature":0.5, "max_length":256},
-    huggingfacehub_api_token=huggingfacehub_api_token # Pass token explicitly
+    repo_id="tiiuae/falcon-7b-instruct",  # ✅ uses inference API
+    model_kwargs={"temperature": 0.5, "max_new_tokens": 256},
+    huggingfacehub_api_token=huggingfacehub_api_token
 )
+
 
 # Create QA Chain
 qa_chain = RetrievalQA.from_chain_type(
@@ -34,7 +35,7 @@ qa_chain = RetrievalQA.from_chain_type(
 st.set_page_config(page_title="RAG Chatbot", page_icon="🤖")
 st.title("💬 Custom AI Chatbot")
 
-user_input = st.text_input("Ask a question about Parallel & Distributed Computing:")
+user_input = st.text_input("Ask a question about AI,CyberSecurity,Elon musk,climate change:")
 
 if user_input:
     result = qa_chain.run(user_input)
