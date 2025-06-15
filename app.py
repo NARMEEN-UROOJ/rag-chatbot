@@ -8,7 +8,10 @@ import os
 # Initialize the FAISS vector store
 db = FAISS.load_local(
     "faiss_index",
-    HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2"),
+    HuggingFaceEmbeddings(
+        model_name="all-MiniLM-L6-v2",
+        model_kwargs={"device": "cpu"}
+    ),
     index_name="index",
     allow_dangerous_deserialization=True
 )
@@ -20,7 +23,7 @@ if not huggingfacehub_api_token:
     st.error("HUGGINGFACEHUB_API_TOKEN environment variable not set!")
     st.stop()
 
-# ✅ THIS MUST BE OUTSIDE the `if` block
+# ✅ This must be outside the `if` block
 llm = HuggingFaceEndpoint(
     repo_id="google/flan-t5-base",
     huggingfacehub_api_token=huggingfacehub_api_token
@@ -43,3 +46,4 @@ if user_input:
     result = qa_chain.run(user_input)
     st.markdown("### 🤖 Answer:")
     st.write(result)
+
